@@ -1,6 +1,24 @@
 # https://leetcode.com/problems/maximum-absolute-sum-of-any-subarray/description/
 
-# Binary Search Approach
+
+# Kandane Approach O(N)
+class Solution:
+    def maxAbsoluteSum(self, arr: List[int]) -> int:
+        n = len(arr)
+        out = 0
+        curPos, curNeg = 0, 0  # Kandane for normal and negative array
+        for i in range(n):
+            curPos += arr[i]
+            curNeg += -arr[i]
+            if curPos < 0:
+                curPos = 0
+            if curNeg < 0:
+                curNeg = 0
+            out = max(out, curPos, curNeg)
+        return out
+
+
+# Binary Search Approach O(N*log(N))
 class Solution:
     def maxAbsoluteSum(self, arr: List[int]) -> int:
         n = len(arr)
