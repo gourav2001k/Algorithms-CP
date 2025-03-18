@@ -1,5 +1,6 @@
 # https://leetcode.com/problems/longest-nice-subarray/description
 
+# Sliding window(fixed size) + Binary search for optimisation
 class Solution:
     def longestNiceSubarray(self, arr: List[int]) -> int:
         n = len(arr)
@@ -36,3 +37,20 @@ class Solution:
             else:
                 r = m
         return l
+
+
+# Approach 2: Sliding window/Two pointer (dynamic size)
+
+class Solution:
+    def longestNiceSubarray(self, arr: List[int]) -> int:
+        n = len(arr)
+        curBits = [-1 for i in range(32)]
+        prev, out = -1, 0
+        for i in range(n):
+            for j in range(32):
+                if (1 << j) & arr[i]:
+                    if curBits[j] != -1:
+                        prev = max(prev, curBits[j])
+                    curBits[j] = i
+            out = max(i-prev, out)
+        return out
