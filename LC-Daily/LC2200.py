@@ -1,3 +1,6 @@
+# https://leetcode.com/problems/find-all-k-distant-indices-in-an-array/description/
+
+# Approach 1: Create intervals, merge intervals
 class Solution:
     def findKDistantIndices(self, arr: List[int], key: int, k: int) -> List[int]:
         n = len(arr)
@@ -25,4 +28,20 @@ class Solution:
                 out[-1][1] = max(out[-1][1], b)
             else:
                 out.append([a, b])
+        return out
+
+# Approach 2: Two pointers
+
+
+class Solution:
+    def findKDistantIndices(self, arr: List[int], key: int, k: int) -> List[int]:
+        n = len(arr)
+        prev, out = 0, []
+        for i in range(n):
+            if arr[i] != key:
+                continue
+            prev = max(prev, i-k)
+            while prev <= min(n-1, i+k):
+                out.append(prev)
+                prev += 1
         return out
