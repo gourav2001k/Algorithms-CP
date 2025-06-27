@@ -1,3 +1,5 @@
+# https://leetcode.com/problems/longest-binary-subsequence-less-than-or-equal-to-k/description/
+
 class Solution:
     def longestSubsequence(self, a: str, k: int) -> int:
         n = len(a)
