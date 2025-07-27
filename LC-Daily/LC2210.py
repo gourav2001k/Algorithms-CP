@@ -1,3 +1,5 @@
+# https://leetcode.com/problems/count-hills-and-valleys-in-an-array/description/
+
 class Solution:
     def countHillValley(self, nums: List[int]) -> int:
         arr = []
