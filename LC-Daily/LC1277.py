@@ -1,5 +1,7 @@
 # https://leetcode.com/problems/count-square-submatrices-with-all-ones/description/
 
+# Approach 1
+# TC: O(N*M*min(N<M)) via Prefix sum and checking largest square
 class Solution:
     def countSquares(self, mat: List[List[int]]) -> int:
         n, m = len(mat), len(mat[0])
@@ -22,3 +24,19 @@ class Solution:
                 out += k
 
         return out
+
+# Approach 2
+
+# TC: O(N*M) via DP
+# DP[i][j] = max size of sqaure ending at i,j
+
+
+class Solution:
+    def countSquares(self, mat: List[List[int]]) -> int:
+        n, m = len(mat), len(mat[0])
+        for i in range(1, n):
+            for j in range(1, m):
+                if not mat[i][j]:
+                    continue
+                mat[i][j] = min(mat[i-1][j-1], min(mat[i-1][j], mat[i][j-1]))+1
+        return sum(map(sum, mat))
