@@ -1,5 +1,7 @@
 # https://leetcode.com/problems/adjacent-increasing-subarrays-detection-ii/
 
+# Approach 1
+# Binary Search O(N*LogN)
 class Solution:
     def maxIncreasingSubarrays(self, nums: List[int]) -> int:
         n = len(nums)
@@ -24,3 +26,18 @@ class Solution:
             if out[i] >= k and out[i+k] >= k:
                 return True
         return False
+
+
+# Approach 2
+# Two Pointers O(N)
+class Solution:
+    def maxIncreasingSubarrays(self, arr: List[int]) -> int:
+        n = len(arr)
+        a, b, out = 1, 0, 0
+        for i in range(1, n):
+            if arr[i] <= arr[i-1]:
+                b, a = a, 1
+            else:
+                a += 1
+            out = max(out, min(a, b), a >> 1)
+        return out
