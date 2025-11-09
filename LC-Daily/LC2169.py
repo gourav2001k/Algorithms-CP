@@ -1,12 +1,11 @@
-# https://leetcode.com/problems/count-days-without-meetings/description/
+# https://leetcode.com/problems/count-operations-to-obtain-zero/description/
 
 class Solution:
-    def countDays(self, days: int, meetings: List[List[int]]) -> int:
-        meetings.sort()
-        prev, out = 1, 0
-        for a, b in meetings:
-            if prev < a:
-                out += a-prev
-            prev = max(b+1, prev)
-        out += days-prev+1
-        return out
+    def countOperations(self, n1: int, n2: int) -> int:
+        c = 0
+        while n1 and n2:
+            if n1 < n2:
+                n1, n2 = n2, n1
+            c += n1//n2
+            n1 -= (n1//n2)*n2
+        return c
