@@ -43,3 +43,22 @@ class Solution:
                     if arr[j][0] <= x <= arr[j][1]:
                         done[j] += 1
         return len(out)
+
+
+# Cleaner
+class Solution:
+    def intersectionSizeTwo(self, arr: List[List[int]]) -> int:
+        n = len(arr)
+        arr.sort(key=lambda x: (x[0], -x[1]))
+        remaining = [2 for i in range(n)]
+        out = 0
+        for i in range(n-1, -1, -1):
+            x, y = arr[i]
+            r = remaining[i]
+            for k in range(x, x+r):
+                remaining[i] -= 1
+                out += 1
+                for j in range(i):
+                    if arr[j][1] >= k:
+                        remaining[j] -= 1
+        return out
