@@ -9,14 +9,18 @@ class Solution:
         for x in nums:
             if x % 3 == 1:
                 if len(h1) > 1:
-                    heappushpop(h1, x)
-                else:
-                    heappush(h1, x)
+                    if x < h1[-1]:
+                        h1.pop()
+                    else:
+                        continue
+                heappush(h1, x)
             elif x % 3 == 2:
                 if len(h2) > 1:
-                    heappushpop(h2, x)
-                else:
-                    heappush(h2, x)
+                    if x < h2[-1]:
+                        h2.pop()
+                    else:
+                        continue
+                heappush(h2, x)
         if s % 3 == 2:
             h1, h2 = h2, h1
         x = 10**6
