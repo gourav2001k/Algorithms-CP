@@ -21,3 +21,20 @@ class Solution:
             out = min(out, (left+right)//x)
 
         return out
+
+
+# approach 2: flatten sort and take median as target value, then calculate operations
+class Solution:
+    def minOperations(self, mat: List[List[int]], x: int) -> int:
+        arr = []
+        for row in mat:
+            arr += row
+        arr.sort()
+        n = len(arr)
+        median = arr[(n-1) >> 1]
+        out = (median-arr[0])//x
+        for i in range(1, n):
+            if (arr[i]-arr[i-1]) % x:
+                return -1
+            out += abs(median-arr[i])//x
+        return out
